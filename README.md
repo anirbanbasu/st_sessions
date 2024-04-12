@@ -5,3 +5,7 @@ This project contains various scenarios to check whether certain behaviours with
 ## Dependencies
 
 Python 3.12.0. Use `pip install --upgrade -r requirements.txt` in a virtual environment.
+
+## Deployment
+
+Check out the live deployment on Streamlit cloud: [https://st_sessions.streamlit.app](https://st_sessions.streamlit.app).
