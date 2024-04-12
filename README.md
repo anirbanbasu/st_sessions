@@ -8,4 +8,4 @@ Python 3.12.0. Use `pip install --upgrade -r requirements.txt` in a virtual envi
 
 ## Deployment
 
-Check out the live deployment on Streamlit cloud: [https://st_sessions.streamlit.app](https://st_sessions.streamlit.app).
+Check out the live deployment on Streamlit cloud: [https://st-sessions.streamlit.app](https://st-sessions.streamlit.app).
