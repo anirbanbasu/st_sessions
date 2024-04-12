@@ -1,10 +1,14 @@
 """A simple Hello World app second page in Streamlit"""
 
 import streamlit as st
-from utils.settings_manager import load_settings, update_settings
+from utils.settings_manager import (
+    initialise_shadow_variables,
+    load_settings,
+    update_settings,
+)
 
 # Setup page metadata and load settings
-if "first_run" not in st.session_state:
+if "first_run" not in st.session_state or st.session_state.first_run is True:
     st.set_page_config(
         page_title="Streamlit Session State",
         layout="wide",
@@ -13,6 +17,8 @@ if "first_run" not in st.session_state:
     )
 
     load_settings()
+else:
+    initialise_shadow_variables()
 
 st.title("Streamlit Session State App Page 2!")
 st.markdown(
@@ -38,7 +44,6 @@ settings__shell = col1.text_input(
     This displays the current shell as available from the OS environment.
     Changing it will have no effect on the corresponding environment variable.""",
 )
-st.session_state.settings__shell = settings__shell
 
 settings__user = col2.text_input(
     "Current user",
@@ -48,7 +53,6 @@ settings__user = col2.text_input(
     This displays the current user as available from the OS environment.
     Changing it will have no effect on the corresponding environment variable.""",
 )
-st.session_state.settings__user = settings__user
 
 st.markdown(
     """
@@ -74,6 +78,18 @@ st.markdown(
 
     **Note** that there are two sets of session state variables. One set is shadowing the other.
     The shadow set is connected to the user interface elements as keys. The other set isn't.
+
+    ## The fix
+
+    Okay, no, that's not true! The session state variables seems to be not reset. Why?
+
+    1. **Load settings**: Load settings from environment variables or initialise
+    them with default values. Store them in session state variables. Do this only
+    once for all pages.
+
+    2. **Initialise shadow session state variables**: Create shadow variables 
+    for each session state variable as necessary. Initialise shadow variables 
+    everytime the page is loaded.
 
     For details, check the code of this app on 
     [GitHub](https://github.com/anirbanbasu/st_sessions/).
